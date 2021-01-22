@@ -1,17 +1,39 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
-numDeg = 360
-degrees = np.linspace(0, 2*np.pi, numDeg)
+initDeg = 0
+endDeg = 360
+degStep = 1
 r = 1
-x, y = [], []
-fig, ax = plt.subplots()
-ax.axis('equal')
-ax.set(xlim=(-2,2), ylim=(-2,2))
+angles = np.linspace(0, 2*np.pi, int((endDeg-initDeg+1) / degStep))
 
-for t in degrees:
-    x.append(r*np.cos(t))
-    y.append(r*np.sin(t))
-    ax.plot(x, y, 'r')
-    plt.pause(0.001)
+leaveTrail = True
+realTimeStep = 1000
+timeMult = 100
+timeStep = int(realTimeStep / timeMult)
+
+xdata, ydata = [], []
+fig, ax = plt.subplots()
+ln, = ax.plot([], [], 'ro')
+ax.axis('equal')
+
+def init():
+    ax.set_xlim(-1.5*r, 1.5*r)
+    ax.set_ylim(-1.5*r, 1.5*r)
+    return ln,
+
+def drawCircle(t):
+    if leaveTrail:
+        xdata.append(r*np.cos(t))
+        ydata.append(r*np.sin(t))
+        ln.set_data(xdata, ydata)
+    else:
+        ln.set_data(r*np.cos(t), r*np.sin(t))
+    return ln,
+
+
+draw = FuncAnimation(fig, drawCircle, frames=angles, init_func=init, interval=timeStep,
+                     repeat=False, blit=False)
+
 plt.show()
