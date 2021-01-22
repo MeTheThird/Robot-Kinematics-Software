@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -7,7 +8,7 @@ xPositions = [12, 1, -6, 9]
 yPositions = [5, -3, 2, 6]
 assert len(xPositions) == len(yPositions)
 
-numSteps = 360
+numSteps = 503
 times = np.linspace(0, numSteps, numSteps+1)
 
 leaveTrail = True
@@ -33,12 +34,17 @@ def init():
 def drawPoly(frame):
     ind = int(frame/(numSteps/len(xPositions))) % len(xPositions)
     nextInd = 0 if ind==len(xPositions)-1 else ind+1
-    t = (frame % int(numSteps/len(xPositions))) / (numSteps/len(xPositions))
+    t = math.fmod(frame, float(numSteps)/len(xPositions)) / (numSteps/len(xPositions))
+    # print("frame:", frame, "t:", t, "ind:", ind, "nextInd:", nextInd)
+    # print("prevX:", xPositions[ind], "prevY:", yPositions[ind])
+    # print("nextX:", xPositions[nextInd], "nextY:", yPositions[nextInd])
 
     rise = float(yPositions[nextInd])-yPositions[ind]
     run = float(xPositions[nextInd])-xPositions[ind]
     xPos = xPositions[ind] + run*t
     yPos = yPositions[ind] + rise*t
+    # print("rise:", rise, "run:", run)
+    # print("xPos:", xPos, "yPos:", yPos, "\n")
 
     if leaveTrail:
         xdata.append(xPos)
