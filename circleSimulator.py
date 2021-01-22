@@ -16,7 +16,7 @@ timeStep = int(realTimeStep / timeMult)
 xdata, ydata = [], []
 fig, ax = plt.subplots()
 ln, = ax.plot([], [], 'ro')
-ax.axis('equal')
+ax.set_aspect('equal', adjustable='box')
 
 def init():
     ax.set_xlim(-1.5*r, 1.5*r)
