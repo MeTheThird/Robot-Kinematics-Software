@@ -10,7 +10,7 @@ angles = np.linspace(0, 2*np.pi, int((endDeg-initDeg+1) / degStep))
 
 leaveTrail = True
 realTimeStep = 1000
-timeMult = 100
+timeMult = 1
 timeStep = int(realTimeStep / timeMult)
 
 xdata, ydata = [], []
