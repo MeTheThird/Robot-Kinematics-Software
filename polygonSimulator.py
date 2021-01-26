@@ -3,11 +3,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-# the x and y positions are given in order and represent a polygon
-xPositions = [12, -9, 3, 10]
-yPositions = [-6, -2, 5, -2]
-assert len(xPositions) == len(yPositions)
-assert len(xPositions) > 1
+# the vertices are given in order and represent a polygon
+vertices = [(12, -6), (-9, -2), (3, 5), (10, -2)]
+assert len(vertices) > 1
+
+xPositions = [0 for _ in range(len(vertices))]
+yPositions = [0 for _ in range(len(vertices))]
+for i in range(len(vertices)):
+    xPositions[i] = vertices[i][0]
+    yPositions[i] = vertices[i][1]
 
 distances = [0 for _ in range(len(xPositions))]
 distpfx = [0 for _ in range(len(xPositions))]
