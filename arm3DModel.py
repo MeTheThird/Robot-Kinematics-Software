@@ -11,12 +11,10 @@ I4 = np.array([[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]])
 
 # note that the unit of length used is centimeters
 Mlist = [np.array([[1,0,0,0], [0,1,0,0], [0,0,1,1.05], [0,0,0,1]]),
-         np.array([[1,0,0,0], [0,1,0,0], [0,0,1,1.65], [0,0,0,1]]),
          np.array([[1,0,0,0], [0,1,0,0], [0,0,1,2.65], [0,0,0,1]])]
 Slist = [np.array([[0], [0], [1], [0], [0], [0]]),
          np.array([[0], [1], [0], [0], [0], [0]]),
          np.array([[0], [1], [0], [-1.05], [0], [0]]),
-         np.array([[0], [1], [0], [-1.65], [0], [0]]),
          np.array([[0], [0], [1], [0], [0], [0]])]
 
 def bracket(arr):
@@ -42,8 +40,7 @@ def exp6(arr, theta):
 def simulate(thetaArr):
     ret = [(0,0,0)]
     poeList = [np.matmul(exp6(Slist[0], thetaArr[0]), exp6(Slist[1], thetaArr[1])),
-               exp6(Slist[2], thetaArr[2]),
-               np.matmul(exp6(Slist[3], thetaArr[3]), exp6(Slist[4], thetaArr[4]))]
+               np.matmul(exp6(Slist[2], thetaArr[2]), exp6(Slist[3], thetaArr[3]))]
 
     # initialized to the 4x4 indentity matrix
     poe = I4
@@ -66,10 +63,9 @@ initPnts = simulate([0 for _ in range(5)])
 shoulderRotation = np.pi/12
 shoulderJoint = np.pi/12
 elbowJoint = np.pi/12
-wristJoint = np.pi/12
 wristRotation = np.pi/12
 
-simPnts = simulate([shoulderRotation, shoulderJoint, elbowJoint, wristJoint, wristRotation])
+simPnts = simulate([shoulderRotation, shoulderJoint, elbowJoint, wristRotation])
 # print("simPnts:", simPnts, "\n")
 
 # plots the initial and final positions of the arm
@@ -80,9 +76,9 @@ for i in range(1, len(initPnts)):
     ax.plot(simPnts[i-1][0] + t*(simPnts[i][0]-simPnts[i-1][0]),
             simPnts[i-1][1] + t*(simPnts[i][1]-simPnts[i-1][1]),
             simPnts[i-1][2] + t*(simPnts[i][2]-simPnts[i-1][2]))
-    # print("i: " + str(i) + ", dist from i to i-1: " +
-    #       str(np.sqrt((simPnts[i][0]-simPnts[i-1][0])**2 + (simPnts[i][1]-simPnts[i-1][1])**2 +
-    #                     (simPnts[i][2]-simPnts[i-1][2])**2)))
+    print("i: " + str(i) + ", dist from i to i-1: " +
+          str(np.sqrt((simPnts[i][0]-simPnts[i-1][0])**2 + (simPnts[i][1]-simPnts[i-1][1])**2 +
+                        (simPnts[i][2]-simPnts[i-1][2])**2)))
 
 plt.show()
 

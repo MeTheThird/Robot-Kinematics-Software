@@ -7,11 +7,16 @@ from adafruit_servokit import ServoKit
 
 # Set channels to the number of servo channels on your kit.
 # 8 for FeatherWing, 16 for Shield/HAT/Bonnet.
-kit = ServoKit(channels=16)
+kit = ServoKit(channels=16, address=65)
 
-kit.servo[15].set_pulse_width_range(444, 2556)
+# channel being tested
+CHNL = 0
 
-kit.servo[15].angle = 180
-time.sleep(2)
-kit.servo[15].angle = 0
-time.sleep(2)
+kit.servo[CHNL].set_pulse_width_range(444, 2556)
+
+kit.servo[4].angle = 90
+
+kit.servo[CHNL].angle = 0
+time.sleep(4)
+kit.servo[CHNL].angle = 180
+time.sleep(4)
