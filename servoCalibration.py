@@ -20,8 +20,8 @@ kit.servo[CHNL].set_pulse_width_range(450, 2500)
 
 # kit.servo[4].angle = 90
 # GPIO.output(PWMOEN, 0) # enable outputs of PCA9685
-kit.servo[CHNL].angle = 0
+kit.servo[CHNL].angle = 45
 time.sleep(5)
 # GPIO.output(PWMOEN, 1) # disable outputs of PCA9685
-kit.servo[CHNL].angle = 180
+kit.servo[CHNL].angle = 135
 time.sleep(5)
