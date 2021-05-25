@@ -35,6 +35,7 @@ def angleSolve(x, y, alphaGuess, betaGuess):
 
     return sp.nsolve((f1,f2), (alpha,beta), (alphaGuess,betaGuess))
 
+
 # positions
 x1 = 190.0
 y1 = -80.0
@@ -52,6 +53,7 @@ for i in range(len(firstAngles)):
 
 print("firstAngles: ", firstAngles)
 print("finalAngles: ", finalAngles)
+
 
 # constants
 INIT_OPEN = [90, 90, 90, 90, 70]
